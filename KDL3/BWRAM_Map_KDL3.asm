@@ -17,6 +17,8 @@
 !BWRAM_KDL3_Level_Sprite_YSpeedLo = $401DA2
 !BWRAM_KDL3_Level_Sprite_YSpeedHi = !BWRAM_KDL3_Level_Sprite_YSpeedLo+$01
 
+!BWRAM_KDL3_Global_GameState = $4036D0
+
 !BWRAM_KDL3_Level_Player_LifeCountLo = $4039CF
 !BWRAM_KDL3_Level_Player_LifeCountHi = !BWRAM_KDL3_Level_Player_LifeCountLo+$01
 !BWRAM_KDL3_Level_Player_KirbyHPLo = $4039D1
@@ -41,6 +43,18 @@
 !BWRAM_KDL3_Level_Player_KirbyCopyAbilityHi = !BWRAM_KDL3_Level_Player_KirbyCopyAbilityLo+$01
 !BWRAM_KDL3_Level_Player_GooeyCopyAbilityLo = $4054AB
 !BWRAM_KDL3_Level_Player_GooeyCopyAbilityHi = !BWRAM_KDL3_Level_Player_GooeyCopyAbilityLo+$01
+
+!BWRAM_KDL3_Level_Player_GooeyStatus = $405541
+
+!BWRAM_KDL3_Global_CurrentLevel = $4053CF
+!BWRAM_KDL3_Global_PreviousLevel = $4053D1
+!BWRAM_KDL3_Global_CurrentStage = $4053D3
+!BWRAM_KDL3_Global_BossButchStatus = $4053DD
+!BWRAM_KDL3_Global_SuperMG5Status = $4053DF
+!BWRAM_KDL3_Global_JumpingStatus = $4053E1
+
+!BWRAM_KDL3_Global_Player1_ControllerMirrorLo = $4060C1
+!BWRAM_KDL3_Global_Player1_ControllerMirrorHi = !BWRAM_KDL3_Global_Player1_ControllerMirrorLo+$01
 
 !BWRAM_KDL3_Global_PaletteMirror = $406300
 

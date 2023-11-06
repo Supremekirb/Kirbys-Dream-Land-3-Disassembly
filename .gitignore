@@ -1,0 +1,7 @@
+Global/
+Firmware/
+*.bin
+*.sfc
+*.brr
+TEMP2.asm
+KDL3/AsarScripts/TEMP1.asm
