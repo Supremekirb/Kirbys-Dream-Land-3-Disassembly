@@ -1,0 +1,28 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile KDL3",
+            "dependsOn": ["Compile game"],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Compile game",
+            "type": "shell",
+            "command": [
+                "cd ${cwd}/KDL3 &&",
+                "python ${cwd}/compile.py ${cwd} '${cwd}/KDL3/KDL3.sfc' -a ${cwd}/Global/asar.exe",
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        }
+    ]
+}
