@@ -17,7 +17,7 @@
             "type": "shell",
             "command": [
                 "cd ${cwd}/KDL3 &&",
-                "python ${cwd}/compile.py ${cwd} '${cwd}/KDL3/KDL3.sfc' -a ${cwd}/Global/asar.exe",
+                "python ${cwd}/scripts/compile.py ${cwd} ${cwd}/KDL3.sfc -a ${cwd}/Global/asar.exe",
             ],
             "group": {
                 "kind": "build",

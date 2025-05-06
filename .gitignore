@@ -5,3 +5,7 @@ Firmware/
 *.brr
 TEMP2.asm
 KDL3/AsarScripts/TEMP1.asm
+Pretty/
+*_TEMP_BACKUP
+*.pal
+__pycache__/
