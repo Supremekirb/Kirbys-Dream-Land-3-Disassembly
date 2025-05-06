@@ -28,14 +28,9 @@ def binaryToJascPal(input: io.BufferedReader, output: io.TextIOWrapper):
     rgbs = binToRGBs(input)
     # this header stuff was copied from an example palette file /shrug
     output.write("JASC-PAL\n")
-    output.write("0100\n")
-    output.write("256\n")
-    for i in range(0, 256):
-        try:
-            r, g, b = rgbs[i]
-        except IndexError:
-            r, g, b = 0, 0, 0
-
+    output.write("0100\n") # length in hex +1? No? Can't figure out what this is
+    output.write(f"{len(rgbs)}\n")
+    for r, g, b in rgbs:
         output.write(str(r) + " ")
         output.write(str(g) + " ")
         output.write(str(b) + "\n")
@@ -76,11 +71,11 @@ if __name__ == "__main__":
                     
             match args.format:
                 case "jasc": # used by programs such as Aseprite
-                    with open(args.input, "wb") as input, open(args.output, "w") as output:
+                    with open(args.input, "rb") as input, open(args.output, "w") as output:
                         binaryToJascPal(input, output)
 
                 case "microsoft": # used by programs such as YY-CHR
-                    with open(args.input, "wb") as input, open(args.output, "wb") as output:
+                    with open(args.input, "rb") as input, open(args.output, "wb") as output:
                         binaryToMSPal(input, output)
                 
         case "tobin":
