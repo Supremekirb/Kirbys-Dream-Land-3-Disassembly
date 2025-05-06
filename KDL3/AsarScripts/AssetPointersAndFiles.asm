@@ -130,6 +130,13 @@ PalettePointersStart:
 	dl $DE0B52,$DE0B8E,PitchPalette01,PitchPalette01End
 	dl $DE0B8E,$DE0BCA,PitchPalette02,PitchPalette02End
 	dl $DE0BCA,$DE0C06,PitchPalette03,PitchPalette03End
+        dl $C61F04,$C61F24,PauseScreenPalette00,PauseScreenPalette00End
+        dl $C61F24,$C61F44,PauseScreenPalette01,PauseScreenPalette01End
+        dl $C61F44,$C61F64,PauseScreenPalette02,PauseScreenPalette02End
+        dl $C61F64,$C61F84,PauseScreenPalette03,PauseScreenPalette03End
+        dl $C61F84,$C61FA4,PauseScreenPalette04,PauseScreenPalette04End
+        dl $C61FA4,$C61FC4,PauseScreenPalette05,PauseScreenPalette05End
+
 PalettePointersEnd:
 
 ;--------------------------------------------------------------------
@@ -854,7 +861,7 @@ dl $C61DA4,$C61DC4,DATA_C61DA4,DATA_C61DA4End
 dl $C61DC4,$C61E04,DATA_C61DC4,DATA_C61DC4End
 dl $C61E04,$C61E44,DATA_C61E04,DATA_C61E04End
 dl $C61E44,$C61F04,DATA_C61E44,DATA_C61E44End
-dl $C61F04,$C61FC4,DATA_C61F04,DATA_C61F04End
+; pause screen palettes
 dl $C61FC4,$C61FE4,DATA_C61FC4,DATA_C61FC4End
 dl $C61FE4,$C620E4,DATA_C61FE4,DATA_C61FE4End
 dl $C620E4,$C621E4,DATA_C620E4,DATA_C620E4End
@@ -3563,6 +3570,24 @@ PitchPalette02End:
 PitchPalette03:
 	db "PitchPalette03.bin"
 PitchPalette03End:
+PauseScreenPalette00:
+        db "PauseScreenPalette00.bin"
+PauseScreenPalette00End
+PauseScreenPalette01:
+        db "PauseScreenPalette01.bin"
+PauseScreenPalette01End
+PauseScreenPalette02:
+        db "PauseScreenPalette02.bin"
+PauseScreenPalette02End
+PauseScreenPalette03:
+        db "PauseScreenPalette03.bin"
+PauseScreenPalette03End
+PauseScreenPalette04:
+        db "PauseScreenPalette04.bin"
+PauseScreenPalette04End
+PauseScreenPalette05:
+        db "PauseScreenPalette05.bin"
+PauseScreenPalette05End
 
 ;--------------------------------------------------------------------
 
@@ -4195,9 +4220,6 @@ DATA_C61E04End:
 DATA_C61E44:
         db "DATA_C61E44.bin"
 DATA_C61E44End:
-DATA_C61F04:
-        db "DATA_C61F04.bin"
-DATA_C61F04End:
 DATA_C61FC4:
         db "DATA_C61FC4.bin"
 DATA_C61FC4End:

@@ -17,15 +17,17 @@ def toBGR555(rgb: tuple[int, int, int]) -> int:
     return ((b << 10) | (g << 5) | r)
 
 
-def binToRGBs(input: io.BufferedReader):
-    rgbs: list[tuple[int, int, int]] = [[0, 0, 0]]
+def binToRGBs(input: io.BufferedReader, addTransparentColour = False):
+    rgbs: list[tuple[int, int, int]] = []
+    if addTransparentColour:
+        rgbs.append((0, 0, 0))
     while i:=input.read(2):
         assert len(i) == 2, "Input file is not a multiple of 2 bytes in size!"
         rgbs.append(fromBGR555(int.from_bytes(i, "little")))
     return rgbs
 
-def binaryToJascPal(input: io.BufferedReader, output: io.TextIOWrapper):
-    rgbs = binToRGBs(input)
+def binaryToJascPal(input: io.BufferedReader, output: io.TextIOWrapper, addTransparentColour = False):
+    rgbs = binToRGBs(input, addTransparentColour)
     # this header stuff was copied from an example palette file /shrug
     output.write("JASC-PAL\n")
     output.write("0100\n") # length in hex +1? No? Can't figure out what this is
@@ -35,8 +37,8 @@ def binaryToJascPal(input: io.BufferedReader, output: io.TextIOWrapper):
         output.write(str(g) + " ")
         output.write(str(b) + "\n")
 
-def binaryToMSPal(input: io.BufferedReader, output: io.BufferedWriter):
-    rgbs = binToRGBs(input)
+def binaryToMSPal(input: io.BufferedReader, output: io.BufferedWriter, addTransparentColour = False):
+    rgbs = binToRGBs(input, addTransparentColour)
     header_size = len("RIFF") + 4 + len("PAL data") + 4 + 2 + 2 # 24 bytes
     file_size = header_size + len(rgbs)*4
 
@@ -61,6 +63,7 @@ if __name__ == "__main__":
     parser.add_argument("-o", "--output", required=False)
     parser.add_argument("-m", "--mode", choices=("frombin", "tobin"), default="frombin")
     parser.add_argument("-f", "--format", choices=("microsoft", "jasc"), default="jasc")
+    parser.add_argument("-t", "--transparent", action='store_true')
     args = parser.parse_args()
 
     match args.mode:
@@ -72,11 +75,11 @@ if __name__ == "__main__":
             match args.format:
                 case "jasc": # used by programs such as Aseprite
                     with open(args.input, "rb") as input, open(args.output, "w") as output:
-                        binaryToJascPal(input, output)
+                        binaryToJascPal(input, output, args.transparent)
 
                 case "microsoft": # used by programs such as YY-CHR
                     with open(args.input, "rb") as input, open(args.output, "wb") as output:
-                        binaryToMSPal(input, output)
+                        binaryToMSPal(input, output, args.transparent)
                 
         case "tobin":
             print(f"Converting {args.input} from .pal to binary")
