@@ -65,7 +65,7 @@ if __name__ == "__main__":
     parser.add_argument("input")
     parser.add_argument("-o", "--output", required=False)
     parser.add_argument("-m", "--mode", choices=("frombin", "tobin"), default="frombin")
-    parser.add_argument("-f", "--format", choices=("microsoft", "jasc"), default="text")
+    parser.add_argument("-f", "--format", choices=("microsoft", "jasc"), default="jasc")
     args = parser.parse_args()
 
     match args.mode:

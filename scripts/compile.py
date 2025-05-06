@@ -37,7 +37,8 @@ if __name__ == "__main__":
         try:
             result.check_returncode()
         except subprocess.CalledProcessError:
-            os.remove(args.output)
+            if os.path.exists(args.output):
+                os.remove(args.output)
             if os.path.exists(args.output + "_TEMP_BACKUP"):
                 os.rename(args.output + "_TEMP_BACKUP", args.output)
             raise
