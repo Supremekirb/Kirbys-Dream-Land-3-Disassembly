@@ -3,7 +3,7 @@ import logging
 import os
 import pathlib
 
-from modules import MODULES
+from compiler_modules._modules import MODULES
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser("Kirby's Dream Land 3 Asset Prettifyer")

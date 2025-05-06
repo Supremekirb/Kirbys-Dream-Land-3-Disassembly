@@ -4,7 +4,7 @@ import os
 import pathlib
 
 import palette_converter
-from compile_module import KDL3Module
+from compiler_modules._compile_module import KDL3Module
 
 
 class PalettesModule(KDL3Module):
