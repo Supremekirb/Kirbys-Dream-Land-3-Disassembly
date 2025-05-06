@@ -22,6 +22,14 @@ class PalettesModule(KDL3Module):
                 palette_converter.binaryToJascPal(input, output)
                 
         logging.info("Reformatted palettes!")
-        
+
+
     def fromPrettyFormat(self):
-        ...
+        logging.info("Reformatting palettes...")
+        
+        for file in glob.glob(os.path.join(self.moduleAssetFolder, "*.pal")):
+            path = os.path.join(self.projectDir, "KDL3/Palettes",
+                                os.path.splitext(os.path.basename(file))[0] + ".bin")
+            with open(file, "r") as input, open(path, "wb") as output:
+                logging.debug(f"Converting palette {file}...")
+                palette_converter.jascPalToBinary(input, output)

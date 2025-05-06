@@ -26,6 +26,13 @@ def binToRGBs(input: io.BufferedReader, addTransparentColour = False):
         rgbs.append(fromBGR555(int.from_bytes(i, "little")))
     return rgbs
 
+
+def RGBsToBin(rgbs: list[tuple[int, int, int]], output: io.BufferedWriter):
+    for colour in rgbs:
+        bgr555 = toBGR555(colour)
+        output.write(bgr555.to_bytes(2, 'little'))
+
+
 def binaryToJascPal(input: io.BufferedReader, output: io.TextIOWrapper, addTransparentColour = False):
     rgbs = binToRGBs(input, addTransparentColour)
     # this header stuff was copied from an example palette file /shrug
@@ -36,6 +43,21 @@ def binaryToJascPal(input: io.BufferedReader, output: io.TextIOWrapper, addTrans
         output.write(str(r) + " ")
         output.write(str(g) + " ")
         output.write(str(b) + "\n")
+        
+        
+def jascPalToBinary(input: io.TextIOWrapper, output: io.BufferedWriter, addTransparentColour = False):
+    rgbs: list[tuple[int, int, int]] = []
+    
+    if addTransparentColour:
+        rgbs.append((0, 0, 0))
+        
+    for i in input.readlines():
+        split = i.split()
+        if len(split) == 3:
+            rgbs.append(tuple(int(channel) for channel in split))
+    
+    RGBsToBin(rgbs, output)
+            
 
 def binaryToMSPal(input: io.BufferedReader, output: io.BufferedWriter, addTransparentColour = False):
     rgbs = binToRGBs(input, addTransparentColour)
@@ -55,6 +77,21 @@ def binaryToMSPal(input: io.BufferedReader, output: io.BufferedWriter, addTransp
         output.write(g.to_bytes(1))
         output.write(b.to_bytes(1))
         output.write((0).to_bytes(1))
+
+
+def MSPalToBinary(input: io.BufferedReader, output: io.BufferedWriter, addTransparentColour = False):
+    # untested lol
+    rgbs: list[tuple[int, int, int]] = []
+    
+    if addTransparentColour:
+        rgbs.append((0, 0, 0))
+
+    input.seek(len("RIFF") + 4 + len("PAL data") + 4 + 2 + 2) # header size, 24 bytes
+    while i:=input.read(4):
+        assert len(i) == 4, "Input file not a multiple of 4 bytes in size!"
+        rgbs.append(tuple(i[channel] for channel in range(0, 3)))
+    
+    RGBsToBin(rgbs, output)
     
 
 if __name__ == "__main__":
@@ -71,7 +108,7 @@ if __name__ == "__main__":
             print(f"Converting {args.input} from binary to {args.format} .pal")
             if not args.output:
                 args.output = os.path.splitext(args.input)[0] + ".pal"
-                    
+            
             match args.format:
                 case "jasc": # used by programs such as Aseprite
                     with open(args.input, "rb") as input, open(args.output, "w") as output:
@@ -85,5 +122,12 @@ if __name__ == "__main__":
             print(f"Converting {args.input} from .pal to binary")
             if not args.output:
                 args.output = os.path.splitext(args.input)[0] + ".bin"
-            ...
             
+            match args.format:
+                case "jasc":
+                    with open(args.input, "r") as input, open(args.output, "wb") as output:
+                        jascPalToBinary(input, output, args.transparent)
+                    
+                case "microsoft":
+                    with open(args.input, "rb") as input, open(args.output, "wb") as output:
+                        MSPalToBinary(input, output, args.transparent)

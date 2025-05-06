@@ -1,4 +1,5 @@
 import argparse
+import logging
 import os
 import subprocess
 
@@ -8,9 +9,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser("Kirby's Dream Land 3 Project Compiler")
     parser.add_argument("-a", "--asar", default="asar")
     parser.add_argument("-r", "--region", choices=("US", "JP"), default="US")
+    parser.add_argument("-d", "--debug_level", default=10)
     parser.add_argument("project_root")
     parser.add_argument("output")
     args = parser.parse_args()
+    
+    logging.root.setLevel(args.debug_level)
     
     ROMID = "KDL3_U" if args.region == "US" else "KDL3_J"
     
