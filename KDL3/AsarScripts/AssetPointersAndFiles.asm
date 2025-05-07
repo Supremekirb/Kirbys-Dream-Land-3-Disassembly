@@ -3572,22 +3572,22 @@ PitchPalette03:
 PitchPalette03End:
 PauseScreenPalette00:
         db "PauseScreenPalette00.bin"
-PauseScreenPalette00End
+PauseScreenPalette00End:
 PauseScreenPalette01:
         db "PauseScreenPalette01.bin"
-PauseScreenPalette01End
+PauseScreenPalette01End:
 PauseScreenPalette02:
         db "PauseScreenPalette02.bin"
-PauseScreenPalette02End
+PauseScreenPalette02End:
 PauseScreenPalette03:
         db "PauseScreenPalette03.bin"
-PauseScreenPalette03End
+PauseScreenPalette03End:
 PauseScreenPalette04:
         db "PauseScreenPalette04.bin"
-PauseScreenPalette04End
+PauseScreenPalette04End:
 PauseScreenPalette05:
         db "PauseScreenPalette05.bin"
-PauseScreenPalette05End
+PauseScreenPalette05End:
 
 ;--------------------------------------------------------------------
 
